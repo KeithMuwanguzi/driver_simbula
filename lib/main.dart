@@ -1,3 +1,4 @@
+import 'package:driver_simbula/config/bindings/pages.dart';
 import 'package:driver_simbula/features/authentication/login/presentation/login_page.dart';
 import 'package:driver_simbula/shared/styles/common_styles.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
       ),
       home: const LoginPage(),
+      getPages: getPages,
     );
   }
 }

@@ -1,16 +1,14 @@
-import 'package:driver_simbula/features/authentication/login/controllers/login_controller.dart';
+import 'package:driver_simbula/features/authentication/signup/controllers/signup_controller.dart';
 import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    final controller = Get.put(SignUpController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -26,7 +24,7 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Expanded(child: Container()),
                       Text(
-                        "Don't have an account?",
+                        "Already Have an Account?",
                         style: getStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -36,10 +34,10 @@ class LoginPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed('/signup');
+                          Get.back();
                         },
                         child: Text(
-                          'REGISTER',
+                          'LOG IN',
                           style: getStyle(
                             color: Colors.purple,
                             fontSize: 20,
@@ -64,24 +62,25 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height / 4),
+                    SizedBox(height: MediaQuery.of(context).size.height / 7),
                     Text(
-                      "LOGIN",
-                      style: GoogleFonts.poppins(
+                      "SIGN UP",
+                      style: getStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        isBold: true,
+                        isItalic: false,
                       ),
                     ),
                   ],
                 ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height / 3,
+                top: MediaQuery.of(context).size.height / 5,
                 left: 30,
                 child: Container(
                   width: MediaQuery.of(context).size.width - 60,
-                  height: 400,
+                  height: 500,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
@@ -100,7 +99,7 @@ class LoginPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
-                            vertical: 80,
+                            vertical: 30,
                           ),
                           child: Column(
                             children: [
@@ -110,38 +109,44 @@ class LoginPage extends StatelessWidget {
                                 isPassword: false,
                                 validate: controller.validateEmail,
                               ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.email,
+                                hintText: 'Full Name -e.g-{Muwanguzi Keith}',
+                                isPassword: false,
+                                validate: controller.validateEmail,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.email,
+                                hintText: 'Contact -e.g-{+256 774538700}',
+                                isPassword: false,
+                                validate: controller.validateEmail,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.email,
+                                hintText: 'Car Brand -e.g-{Toyota}',
+                                isPassword: false,
+                                validate: controller.validateEmail,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.email,
+                                hintText: 'Car Model -e.g-{Premio}',
+                                isPassword: false,
+                                validate: controller.validateEmail,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.email,
+                                hintText: 'License Plate -e.g-{UGZ 001D}',
+                                isPassword: false,
+                                validate: controller.validateEmail,
+                              ),
                               const SizedBox(height: 25),
-                              Obx(
-                                () => CustomPasswordFormField(
-                                  userFunction: () =>
-                                      controller.changeVisibility(),
-                                  controller: controller.password,
-                                  hintText: "Your Password",
-                                  isVisible: controller.isVisible.value,
-                                  validate: controller.validatePassword,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      'Forgot Password?',
-                                      style: getStyle(
-                                        color: Colors.blue,
-                                        fontSize: 13,
-                                        isBold: false,
-                                        isItalic: false,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 75),
                               CustomButton(
-                                buttonText: 'LOG IN',
+                                buttonText: 'SIGN UP',
                                 buttonFunction: () {},
                               ),
                             ],
