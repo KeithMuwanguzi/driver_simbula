@@ -1,10 +1,7 @@
 import 'package:driver_simbula/features/authentication/login/controllers/login_controller.dart';
-import 'package:driver_simbula/shared/styles/common_styles.dart';
-import 'package:driver_simbula/shared/widgets/custom_button.dart';
-import 'package:driver_simbula/shared/widgets/passwordformfield.dart';
-import 'package:driver_simbula/shared/widgets/textformfield.dart';
+import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,7 +58,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height / 5),
+                    SizedBox(height: MediaQuery.of(context).size.height / 4),
                     Text(
                       "LOGIN",
                       style: GoogleFonts.poppins(
@@ -74,7 +71,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: MediaQuery.of(context).size.height / 3.5,
+                top: MediaQuery.of(context).size.height / 3,
                 left: 30,
                 child: Container(
                   width: MediaQuery.of(context).size.width - 60,
@@ -126,7 +123,12 @@ class LoginPage extends StatelessWidget {
                                     onTap: () {},
                                     child: Text(
                                       'Forgot Password?',
-                                      style: textStyleSmall,
+                                      style: getStyle(
+                                        color: Colors.blue,
+                                        fontSize: 13,
+                                        isBold: false,
+                                        isItalic: false,
+                                      ),
                                     ),
                                   ),
                                 ],
