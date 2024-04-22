@@ -1,10 +1,13 @@
 import 'package:driver_simbula/config/bindings/pages.dart';
+import 'package:driver_simbula/config/constants/constants.dart';
 import 'package:driver_simbula/features/authentication/login/presentation/login_page.dart';
 import 'package:driver_simbula/shared/styles/common_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await firebaseInitialization;
   runApp(const MyApp());
 }
 
