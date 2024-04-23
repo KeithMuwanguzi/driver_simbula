@@ -6,7 +6,21 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewPasswordPage extends StatelessWidget {
-  const NewPasswordPage({super.key});
+  final String email;
+  final String name;
+  final String contact;
+  final String carBrand;
+  final String carModel;
+  final String licensePlate;
+  const NewPasswordPage({
+    super.key,
+    required this.email,
+    required this.name,
+    required this.contact,
+    required this.carBrand,
+    required this.carModel,
+    required this.licensePlate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +49,7 @@ class NewPasswordPage extends StatelessWidget {
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height / 4),
                     Text(
-                      "LOGIN",
+                      "PASSWORD",
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 20,
@@ -66,6 +80,7 @@ class NewPasswordPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       Form(
+                        key: controller.formKey,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
@@ -73,7 +88,7 @@ class NewPasswordPage extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              const SizedBox(height: 25),
+                              const SizedBox(height: 45),
                               Obx(
                                 () => CustomPasswordFormField(
                                   userFunction: () =>
@@ -84,28 +99,33 @@ class NewPasswordPage extends StatelessWidget {
                                   validate: controller.validatePassword,
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Text(
-                                      'Forgot Password?',
-                                      style: getStyle(
-                                        color: Colors.blue,
-                                        fontSize: 13,
-                                        isBold: false,
-                                        isItalic: false,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              const SizedBox(height: 25),
+                              Obx(
+                                () => CustomPasswordFormField(
+                                  userFunction: () =>
+                                      controller.changeConfirmVisibility(),
+                                  controller: controller.confirmPassword,
+                                  hintText: "Confirm Your Password",
+                                  isVisible: controller.isConfirmVisible.value,
+                                  validate: controller.validateConfirmPassword,
+                                ),
                               ),
                               const SizedBox(height: 75),
                               CustomButton(
-                                buttonText: 'LOG IN',
-                                buttonFunction: () {},
+                                buttonText: 'REGISTER',
+                                buttonFunction: () {
+                                  if (controller.formKey.currentState!
+                                      .validate()) {
+                                    successSnackBar(
+                                      duration: const Duration(
+                                        seconds: 2,
+                                      ),
+                                      icon: Icons.check_box,
+                                      title: 'Good',
+                                      text: "Working For now",
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),
@@ -119,6 +139,32 @@ class NewPasswordPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  DropdownButtonFormField<String> genderButton(controller) {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: 'Gender',
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+      value: controller.selected.value,
+      onChanged: (newValue) {
+        controller.selected.value = newValue.toString();
+      },
+      items: <String>['Male', 'Female', 'Other']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      validator: (value) {
+        if (value == null) {
+          return 'Please select gender';
+        }
+        return null;
+      },
     );
   }
 }

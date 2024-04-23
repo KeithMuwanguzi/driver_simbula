@@ -6,6 +6,9 @@ class SignUpController extends GetxController {
   final TextEditingController email = TextEditingController();
   final TextEditingController name = TextEditingController();
   final TextEditingController number = TextEditingController();
+  final TextEditingController carBrand = TextEditingController();
+  final TextEditingController carModel = TextEditingController();
+  final TextEditingController licensePlate = TextEditingController();
   Rx<String> selected = "Male".obs;
   Rx<String> userType = "Driver".obs;
 
@@ -23,7 +26,7 @@ class SignUpController extends GetxController {
 
   String? validateField(String? text) {
     if (text == null || text.isEmpty) {
-      return 'Field can not be empty';
+      return 'This can not be empty';
     }
 
     return null;

@@ -1,4 +1,5 @@
 import 'package:driver_simbula/features/authentication/signup/controllers/signup_controller.dart';
+import 'package:driver_simbula/features/authentication/signup/presentation/new_password.dart';
 import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -96,6 +97,7 @@ class SignUpPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       Form(
+                        key: controller.key,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
@@ -111,43 +113,59 @@ class SignUpPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 15),
                               CustomTextFormField(
-                                controller: controller.email,
+                                controller: controller.name,
                                 hintText: 'Full Name -e.g-{Muwanguzi Keith}',
                                 isPassword: false,
-                                validate: controller.validateEmail,
+                                validate: controller.validateField,
                               ),
                               const SizedBox(height: 15),
                               CustomTextFormField(
-                                controller: controller.email,
+                                controller: controller.number,
                                 hintText: 'Contact -e.g-{+256 774538700}',
                                 isPassword: false,
-                                validate: controller.validateEmail,
+                                validate: controller.validateField,
                               ),
                               const SizedBox(height: 15),
                               CustomTextFormField(
-                                controller: controller.email,
+                                controller: controller.carBrand,
                                 hintText: 'Car Brand -e.g-{Toyota}',
                                 isPassword: false,
-                                validate: controller.validateEmail,
+                                validate: controller.validateField,
                               ),
                               const SizedBox(height: 15),
                               CustomTextFormField(
-                                controller: controller.email,
+                                controller: controller.carModel,
                                 hintText: 'Car Model -e.g-{Premio}',
                                 isPassword: false,
-                                validate: controller.validateEmail,
+                                validate: controller.validateField,
                               ),
                               const SizedBox(height: 15),
                               CustomTextFormField(
-                                controller: controller.email,
+                                controller: controller.licensePlate,
                                 hintText: 'License Plate -e.g-{UGZ 001D}',
                                 isPassword: false,
-                                validate: controller.validateEmail,
+                                validate: controller.validateField,
                               ),
                               const SizedBox(height: 25),
                               CustomButton(
                                 buttonText: 'SIGN UP',
-                                buttonFunction: () {},
+                                buttonFunction: () {
+                                  if (controller.key.currentState!.validate()) {
+                                    Get.to(
+                                      () => NewPasswordPage(
+                                        email: controller.email.text.trim(),
+                                        name: controller.name.text.trim(),
+                                        contact: controller.number.text.trim(),
+                                        carBrand:
+                                            controller.carBrand.text.trim(),
+                                        carModel:
+                                            controller.carModel.text.trim(),
+                                        licensePlate:
+                                            controller.licensePlate.text.trim(),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),
