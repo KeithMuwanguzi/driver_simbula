@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: isPassword,
+      validator: validate,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.roboto(

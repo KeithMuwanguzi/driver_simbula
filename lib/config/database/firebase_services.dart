@@ -24,7 +24,6 @@ class AuthController extends GetxController {
     required String name,
     required String phoneNumber,
     required String gender,
-    required String userType,
     required String carBrand,
     required String carModel,
     required String licensePlate,
@@ -43,7 +42,6 @@ class AuthController extends GetxController {
           name: name,
           phoneNumber: phoneNumber,
           gender: gender,
-          userType: userType,
         );
         addCarToFirebase(
           uid: user.uid,
@@ -110,7 +108,6 @@ class AuthController extends GetxController {
     required String name,
     required String phoneNumber,
     required String gender,
-    required String userType,
   }) async {
     try {
       Get.dialog(

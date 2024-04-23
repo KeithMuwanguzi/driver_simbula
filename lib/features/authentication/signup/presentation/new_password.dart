@@ -1,3 +1,4 @@
+import 'package:driver_simbula/config/database/firebase_services.dart';
 import 'package:driver_simbula/features/authentication/signup/controllers/new_password_controller.dart';
 import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
@@ -84,11 +85,14 @@ class NewPasswordPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
-                            vertical: 80,
+                            vertical: 60,
                           ),
                           child: Column(
                             children: [
-                              const SizedBox(height: 45),
+                              Obx(
+                                () => genderButton(controller),
+                              ),
+                              const SizedBox(height: 25),
                               Obx(
                                 () => CustomPasswordFormField(
                                   userFunction: () =>
@@ -116,13 +120,16 @@ class NewPasswordPage extends StatelessWidget {
                                 buttonFunction: () {
                                   if (controller.formKey.currentState!
                                       .validate()) {
-                                    successSnackBar(
-                                      duration: const Duration(
-                                        seconds: 2,
-                                      ),
-                                      icon: Icons.check_box,
-                                      title: 'Good',
-                                      text: "Working For now",
+                                    AuthController.instance
+                                        .createUserWithEmailAndPassword(
+                                      email: email,
+                                      password: controller.password.text.trim(),
+                                      name: name,
+                                      phoneNumber: contact,
+                                      gender: controller.selected.value,
+                                      carBrand: carBrand,
+                                      carModel: carModel,
+                                      licensePlate: licensePlate.toUpperCase(),
                                     );
                                   }
                                 },

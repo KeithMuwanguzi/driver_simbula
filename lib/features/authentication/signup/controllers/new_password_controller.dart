@@ -5,7 +5,7 @@ class NewPasswordController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
-  String selected = "Male";
+  var selected = "Male".obs;
 
   var isVisible = true.obs;
   var isConfirmVisible = true.obs;
