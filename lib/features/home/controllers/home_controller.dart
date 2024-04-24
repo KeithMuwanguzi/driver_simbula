@@ -34,10 +34,13 @@ class HomeController extends GetxController {
               transmission: value['transmission'],
               imageUrl: value['imageUrl'] ?? "",
               maxSpeed: value['maxSpeed'],
+              price: value['price'],
+              availability: value['availability'] ?? "",
             ));
           });
         }
         cars.value = fetchedCars;
+        print(fetchedCars);
       });
     } catch (e) {
       errorSnackBar(
@@ -47,5 +50,45 @@ class HomeController extends GetxController {
         text: e.toString(),
       );
     }
+  }
+
+  void addCar({
+    required String uid,
+    required String brand,
+    required String model,
+    required String licensePlate,
+    required String maxSpeed,
+    required String transmission,
+    required String availability,
+    required String price,
+  }) {
+    DatabaseReference reference = FirebaseDatabase.instance
+        .ref()
+        .child('cars')
+        .child(uid)
+        .child(licensePlate);
+
+    Map carData = {
+      'id': uid,
+      'model': model,
+      'brand': brand,
+      'licensePlate': licensePlate,
+      'imagePath': '',
+      'maxSpeed': maxSpeed,
+      'transmission': transmission,
+      'price': price,
+      'availability': availability,
+    };
+
+    reference.set(carData).then((_) {
+      fetchCars();
+    }).catchError((error) {
+      errorSnackBar(
+        duration: const Duration(seconds: 2),
+        icon: Icons.error,
+        title: 'Error Occured',
+        text: error.toString(),
+      );
+    });
   }
 }

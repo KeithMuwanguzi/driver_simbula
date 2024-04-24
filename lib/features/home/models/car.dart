@@ -6,6 +6,8 @@ class Car {
   final String maxSpeed;
   final String imageUrl;
   final String transmission;
+  final String price;
+  final String availability;
 
   Car({
     required this.id,
@@ -15,6 +17,8 @@ class Car {
     required this.maxSpeed,
     required this.imageUrl,
     required this.transmission,
+    required this.price,
+    required this.availability,
   });
 
   factory Car.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class Car {
       transmission: json['transmission'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       maxSpeed: json['maxSpeed'] ?? '',
+      price: json['price'] ?? '',
+      availability: json['availability'] ?? '',
     );
   }
 
@@ -38,6 +44,8 @@ class Car {
       'transmission': transmission,
       'imageUrl': imageUrl,
       'maxSpeed': maxSpeed,
+      "price": price,
+      "availability": availability,
     };
   }
 }
