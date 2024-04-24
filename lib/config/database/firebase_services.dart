@@ -27,6 +27,10 @@ class AuthController extends GetxController {
     required String carBrand,
     required String carModel,
     required String licensePlate,
+    required String maxSpeed,
+    required String transmission,
+    required String availability,
+    required String price,
   }) async {
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
@@ -48,6 +52,10 @@ class AuthController extends GetxController {
           brand: carBrand,
           model: carModel,
           licensePlate: licensePlate,
+          maxSpeed: maxSpeed,
+          price: price,
+          availability: availability,
+          transmission: transmission,
         );
       }
     } catch (e) {
@@ -153,15 +161,24 @@ class AuthController extends GetxController {
     required String brand,
     required String model,
     required String licensePlate,
+    required String maxSpeed,
+    required String transmission,
+    required String availability,
+    required String price,
   }) async {
     try {
-      DatabaseReference carRef = FirebaseDatabase.instance.ref().child('cars');
+      DatabaseReference carRef =
+          FirebaseDatabase.instance.ref().child('cars').child(licensePlate);
       Map carData = {
         'id': uid,
         'model': model,
         'brand': brand,
         'licensePlate': licensePlate,
-        'imagePath': '',
+        'imagePath': [],
+        'maxSpeed': maxSpeed,
+        'transmission': transmission,
+        'price': price,
+        'availability': availability,
       };
 
       await carRef.set(carData);

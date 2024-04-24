@@ -3,6 +3,7 @@ import 'package:driver_simbula/features/authentication/signup/presentation/new_p
 import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -146,6 +147,24 @@ class SignUpPage extends StatelessWidget {
                                 isPassword: false,
                                 validate: controller.validateField,
                               ),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.speed,
+                                hintText: 'Max Speed -e.g-{180 KPH}',
+                                isPassword: false,
+                                validate: controller.validateField,
+                              ),
+                              const SizedBox(height: 15),
+                              transmissionDrop(controller),
+                              const SizedBox(height: 15),
+                              availabilityDrop(controller),
+                              const SizedBox(height: 15),
+                              CustomTextFormField(
+                                controller: controller.price,
+                                hintText: 'Price Charge -e.g-{1,000,000}',
+                                isPassword: false,
+                                validate: controller.validateField,
+                              ),
                               const SizedBox(height: 25),
                               CustomButton(
                                 buttonText: 'SIGN UP',
@@ -162,6 +181,12 @@ class SignUpPage extends StatelessWidget {
                                             controller.carModel.text.trim(),
                                         licensePlate:
                                             controller.licensePlate.text.trim(),
+                                        maxSpeed: controller.speed.text.trim(),
+                                        price: controller.price.text.trim(),
+                                        availability:
+                                            controller.availability.value,
+                                        transmission:
+                                            controller.transmission.value,
                                       ),
                                     );
                                   }
@@ -179,6 +204,80 @@ class SignUpPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  DropdownButtonFormField<String> transmissionDrop(controller) {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: 'Transmission',
+        labelStyle: GoogleFonts.roboto(
+          fontStyle: FontStyle.italic,
+          fontSize: 13,
+        ),
+      ),
+      value: controller.transmission.value,
+      onChanged: (newValue) {
+        controller.transmission.value = newValue.toString();
+      },
+      items: <String>['Automatic', 'Manual']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: getStyle(
+              color: Colors.black,
+              fontSize: 14,
+              isBold: false,
+              isItalic: false,
+            ),
+          ),
+        );
+      }).toList(),
+      validator: (value) {
+        if (value == null) {
+          return 'Please select transmission';
+        }
+        return null;
+      },
+    );
+  }
+
+  DropdownButtonFormField<String> availabilityDrop(controller) {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: 'Available',
+        labelStyle: GoogleFonts.roboto(
+          fontStyle: FontStyle.italic,
+          fontSize: 13,
+        ),
+      ),
+      value: controller.availability.value,
+      onChanged: (newValue) {
+        controller.availability.value = newValue.toString();
+      },
+      items: <String>["Daily", "Weekly", "Monthly", "Annually"]
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: getStyle(
+              color: Colors.black,
+              fontSize: 14,
+              isBold: false,
+              isItalic: false,
+            ),
+          ),
+        );
+      }).toList(),
+      validator: (value) {
+        if (value == null) {
+          return 'Please select availability';
+        }
+        return null;
+      },
     );
   }
 }

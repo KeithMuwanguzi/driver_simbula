@@ -13,6 +13,10 @@ class NewPasswordPage extends StatelessWidget {
   final String carBrand;
   final String carModel;
   final String licensePlate;
+  final String price;
+  final String transmission;
+  final String maxSpeed;
+  final String availability;
   const NewPasswordPage({
     super.key,
     required this.email,
@@ -21,6 +25,10 @@ class NewPasswordPage extends StatelessWidget {
     required this.carBrand,
     required this.carModel,
     required this.licensePlate,
+    required this.transmission,
+    required this.maxSpeed,
+    required this.price,
+    required this.availability,
   });
 
   @override
@@ -130,6 +138,10 @@ class NewPasswordPage extends StatelessWidget {
                                       carBrand: carBrand,
                                       carModel: carModel,
                                       licensePlate: licensePlate.toUpperCase(),
+                                      transmission: transmission,
+                                      maxSpeed: maxSpeed,
+                                      price: price,
+                                      availability: availability,
                                     );
                                   }
                                 },
@@ -153,7 +165,10 @@ class NewPasswordPage extends StatelessWidget {
     return DropdownButtonFormField(
       decoration: InputDecoration(
         labelText: 'Gender',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+        labelStyle: GoogleFonts.roboto(
+          fontStyle: FontStyle.italic,
+          fontSize: 13,
+        ),
       ),
       value: controller.selected.value,
       onChanged: (newValue) {
@@ -163,7 +178,15 @@ class NewPasswordPage extends StatelessWidget {
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(
+            value,
+            style: getStyle(
+              color: Colors.black,
+              fontSize: 14,
+              isBold: false,
+              isItalic: false,
+            ),
+          ),
         );
       }).toList(),
       validator: (value) {

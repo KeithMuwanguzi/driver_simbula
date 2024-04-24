@@ -1,3 +1,4 @@
+import 'package:driver_simbula/config/database/firebase_services.dart';
 import 'package:driver_simbula/features/authentication/login/controllers/login_controller.dart';
 import 'package:driver_simbula/shared/export.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,7 @@ class LoginPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       Form(
+                        key: controller.key,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
@@ -142,7 +144,15 @@ class LoginPage extends StatelessWidget {
                               const SizedBox(height: 75),
                               CustomButton(
                                 buttonText: 'LOG IN',
-                                buttonFunction: () {},
+                                buttonFunction: () {
+                                  if (controller.key.currentState!.validate()) {
+                                    AuthController.instance
+                                        .signInWithEmailAndPassword(
+                                      email: controller.email.text.trim(),
+                                      password: controller.password.text.trim(),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),

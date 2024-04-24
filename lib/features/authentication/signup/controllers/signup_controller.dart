@@ -9,8 +9,10 @@ class SignUpController extends GetxController {
   final TextEditingController carBrand = TextEditingController();
   final TextEditingController carModel = TextEditingController();
   final TextEditingController licensePlate = TextEditingController();
-  Rx<String> selected = "Male".obs;
-  Rx<String> userType = "Driver".obs;
+  final TextEditingController speed = TextEditingController();
+  final TextEditingController price = TextEditingController();
+  Rx<String> transmission = "Manual".obs;
+  Rx<String> availability = "Daily".obs;
 
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
