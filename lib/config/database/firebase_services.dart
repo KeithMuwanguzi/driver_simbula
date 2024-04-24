@@ -167,14 +167,17 @@ class AuthController extends GetxController {
     required String price,
   }) async {
     try {
-      DatabaseReference carRef =
-          FirebaseDatabase.instance.ref().child('cars').child(licensePlate);
+      DatabaseReference carRef = FirebaseDatabase.instance
+          .ref()
+          .child('cars')
+          .child(uid)
+          .child(licensePlate);
       Map carData = {
         'id': uid,
         'model': model,
         'brand': brand,
         'licensePlate': licensePlate,
-        'imagePath': [],
+        'imagePath': '',
         'maxSpeed': maxSpeed,
         'transmission': transmission,
         'price': price,
