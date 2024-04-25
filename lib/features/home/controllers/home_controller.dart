@@ -61,6 +61,7 @@ class HomeController extends GetxController {
     required String transmission,
     required String availability,
     required String price,
+    required String imagePath,
   }) {
     DatabaseReference reference = FirebaseDatabase.instance
         .ref()
@@ -73,7 +74,7 @@ class HomeController extends GetxController {
       'model': model,
       'brand': brand,
       'licensePlate': licensePlate,
-      'imagePath': '',
+      'imagePath': imagePath,
       'maxSpeed': maxSpeed,
       'transmission': transmission,
       'price': price,

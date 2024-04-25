@@ -1,6 +1,6 @@
-import 'package:driver_simbula/config/constants/constants.dart';
 import 'package:driver_simbula/features/home/controllers/home_controller.dart';
 import 'package:driver_simbula/features/home/models/car.dart';
+import 'package:driver_simbula/features/home/presentation/add_new_car.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,16 +51,7 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.addCar(
-            uid: auth.currentUser!.uid,
-            brand: 'Toyota',
-            model: "Spacio",
-            licensePlate: "UBM 717G",
-            maxSpeed: "180 KPH",
-            transmission: "Automatic",
-            availability: "Daily",
-            price: "25,000",
-          );
+          Get.to(() => const NewCar());
         },
         child: const Icon(Icons.add),
       ),
