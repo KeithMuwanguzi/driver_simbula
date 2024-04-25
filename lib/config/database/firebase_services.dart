@@ -177,7 +177,8 @@ class AuthController extends GetxController {
         'model': model,
         'brand': brand,
         'licensePlate': licensePlate,
-        'imagePath': '',
+        'imagePath':
+            'https://firebasestorage.googleapis.com/v0/b/simbula-273cb.appspot.com/o/profiles%2Fdata%2Fuser%2F0%2Fcom.keith.finalyear.driver_ride.driver_simbula%2Fcache%2F2e4843b7-7457-4ed4-8030-60a96fe7f7e9%2Fcitroen_1.png?alt=media&token=fb56b7cc-023f-4196-83a1-055c3099b8c5',
         'maxSpeed': maxSpeed,
         'transmission': transmission,
         'price': price,

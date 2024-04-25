@@ -9,13 +9,11 @@ class HomeController extends GetxController {
   final databaseReference = FirebaseDatabase.instance.ref().child('cars');
 
   RxList<Car> cars = <Car>[].obs;
-  var length = 5;
 
   @override
   void onInit() {
     super.onInit();
     fetchCars();
-    print(cars);
   }
 
   void fetchCars() {
