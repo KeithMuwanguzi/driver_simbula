@@ -91,7 +91,6 @@ class NewCarController extends GetxController {
     required String transmission,
     required String availability,
     required String price,
-    required String imagePath,
   }) async {
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirProfiles = referenceRoot.child('profiles');
@@ -109,7 +108,7 @@ class NewCarController extends GetxController {
         transmission: transmission,
         availability: availability,
         price: price,
-        imagePath: imagePath,
+        imagePath: imageUrl.value,
       );
     } catch (e) {
       errorSnackBar(
