@@ -132,8 +132,8 @@ class HomePage extends StatelessWidget {
               ),
               Hero(
                 tag: car.model,
-                child: Image.asset(
-                  carImage,
+                child: Image.network(
+                  car.imageUrl,
                   fit: BoxFit.fitWidth,
                   height: 60,
                 ),

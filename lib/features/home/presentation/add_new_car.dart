@@ -126,19 +126,6 @@ class NewCar extends StatelessWidget {
                     buttonText: 'Add Car',
                     buttonFunction: () {
                       if (controller.key.currentState!.validate()) {
-                        // Get.dialog(
-                        //   const AlertDialog(
-                        //     title: Text('Loading'),
-                        //     actions: [
-                        //       Row(
-                        //         children: [
-                        //           CircularProgressIndicator(),
-                        //           Text('Registering your account'),
-                        //         ],
-                        //       )
-                        //     ],
-                        //   ),
-                        // );
                         controller.pushImageToDb(
                           uid: auth.currentUser!.uid,
                           brand: controller.carBrand.text.trim(),
@@ -149,6 +136,8 @@ class NewCar extends StatelessWidget {
                           availability: controller.availability.value,
                           price: controller.price.text.trim(),
                         );
+
+                        Get.back();
                       }
                     },
                   ),

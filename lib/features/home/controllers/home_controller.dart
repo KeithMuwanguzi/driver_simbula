@@ -32,7 +32,7 @@ class HomeController extends GetxController {
               brand: value['brand'],
               model: value['model'],
               transmission: value['transmission'],
-              imageUrl: value['imageUrl'] ?? "",
+              imageUrl: value['imagePath'] ?? "",
               maxSpeed: value['maxSpeed'],
               price: value['price'],
               availability: value['availability'] ?? "",
