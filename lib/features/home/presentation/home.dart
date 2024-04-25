@@ -1,7 +1,9 @@
 import 'package:driver_simbula/config/constants/constants.dart';
 import 'package:driver_simbula/features/home/controllers/home_controller.dart';
+import 'package:driver_simbula/features/home/models/car.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,33 +31,16 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => ListView.builder(
-                  itemCount:
-                      controller.cars.length, // Replace with actual car count
+                  itemCount: controller.cars.length,
                   itemBuilder: (context, index) {
-                    // Generate dummy car data
-                    final carName =
-                        '${controller.cars[index].brand} ${controller.cars[index].model}';
-                    final carImage =
-                        'assets/images/car_${index + 1}.png'; // Replace with actual image URL
+                    final carImage = 'assets/images/car_${index + 1}.png';
                     return GestureDetector(
-                      onTap: () {
-                        // Navigate to car details page
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => CarDetailsPage(carName)));
-                      },
+                      onTap: () {},
                       child: Card(
-                        elevation: 3,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        child: ListTile(
-                            leading: Image.asset(
-                              carImage,
-                              width: 100,
-                              height: 80,
-                              fit: BoxFit.cover,
-                            ),
-                            title: Text(carName),
-                            subtitle: Text(
-                                '${controller.cars[index].id}  UGX ${controller.cars[index].price}')),
-                      ),
+                          elevation: 3,
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          child: buildCar(
+                              context, controller.cars[index], carImage)),
                     );
                   },
                 ),
@@ -78,6 +63,93 @@ class HomePage extends StatelessWidget {
           );
         },
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Container buildCar(BuildContext context, Car car, String carImage) {
+    return Container(
+      height: MediaQuery.of(context).size.height / 6,
+      width: double.infinity,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.teal[50],
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: Colors.teal,
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        car.model,
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        car.brand,
+                        style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${car.transmission} | ${car.availability}',
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        car.price,
+                        style: GoogleFonts.roboto(
+                          fontSize: 18,
+                          color: const Color.fromARGB(255, 24, 21, 189),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Hero(
+                tag: car.model,
+                child: Image.asset(
+                  carImage,
+                  fit: BoxFit.fitWidth,
+                  height: 60,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
