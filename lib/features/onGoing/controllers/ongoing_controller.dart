@@ -22,13 +22,27 @@ class OngoingOrdersController extends GetxController {
       if (ordersMap != null) {
         List<CarOnModel> orders = [];
         ordersMap.forEach((customerId, customerOrders) {
-          customerOrders.forEach((carId, orderData) {
-            if (orderData['id'] == auth.currentUser!.uid) {
-              times.value += 1;
+          customerOrders.forEach((carId, value) {
+            if (value['id'] == auth.currentUser!.uid) {
+              orders.add(
+                CarOnModel(
+                  id: value['licensePlate'],
+                  ownerId: value['id'],
+                  brand: value['brand'],
+                  model: value['model'],
+                  transmission: value['transmission'],
+                  imageUrl: value['imagePath'] ?? "",
+                  maxSpeed: value['maxSpeed'],
+                  price: value['price'],
+                  availability: value['availability'] ?? "",
+                  isPaid: value['isPaid'] ?? false,
+                  timerValue: value['timer_value'] ?? 0,
+                ),
+              );
             }
           });
         });
-        ongoingOrders.assignAll(orders);
+        ongoingOrders.value = orders;
       }
     });
   }
