@@ -1,5 +1,6 @@
 import 'package:driver_simbula/config/database/firebase_services.dart';
 import 'package:driver_simbula/features/home/presentation/add_new_car.dart';
+import 'package:driver_simbula/features/onGoing/controllers/ongoing_controller.dart';
 import 'package:driver_simbula/features/onGoing/models/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class OnGoing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final carController = AuthController.instance;
+    final controller = Get.put(OngoingOrdersController());
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -34,10 +36,14 @@ class OnGoing extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {},
                         child: Card(
-                            elevation: 3,
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            child: buildCar(
-                                context, carController.ongoingOrders[index])),
+                          elevation: 3,
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          child: buildCar(
+                            context,
+                            carController.ongoingOrders[index],
+                            controller,
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -56,7 +62,8 @@ class OnGoing extends StatelessWidget {
     );
   }
 
-  Container buildCar(BuildContext context, CarOnModel car) {
+  Container buildCar(BuildContext context, CarOnModel car,
+      OngoingOrdersController controller) {
     return Container(
       height: MediaQuery.of(context).size.height / 5,
       width: double.infinity,
@@ -146,10 +153,19 @@ class OnGoing extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Time Left | ${car.timerValue}',
+                        'Time Left | ',
                         style: GoogleFonts.roboto(
                           fontSize: 15,
                           color: Colors.grey,
+                        ),
+                      ),
+                      Text(
+                        '${controller.formatTimerValue(car.timerValue)} ',
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: car.timerValue < 100
+                              ? Colors.red
+                              : const Color.fromARGB(255, 24, 21, 189),
                         ),
                       ),
                     ],

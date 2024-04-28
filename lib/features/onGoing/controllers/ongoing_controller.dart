@@ -46,4 +46,23 @@ class OngoingOrdersController extends GetxController {
       }
     });
   }
+
+  String formatTimerValue(int minutes) {
+    int days = minutes ~/ (60 * 24);
+    int remainingHours = (minutes % (60 * 24)) ~/ 60;
+    int remainingMinutes = minutes % 60;
+    String formattedTimerValue = '';
+
+    if (days > 0) {
+      formattedTimerValue += '$days Days ';
+    }
+    if (remainingHours > 0) {
+      formattedTimerValue += '$remainingHours Hrs ';
+    }
+    if (remainingMinutes > 0) {
+      formattedTimerValue += '$remainingMinutes Mins ';
+    }
+
+    return formattedTimerValue;
+  }
 }
